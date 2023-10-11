@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Service Fulfillment System</title>
+</head>
+<header class="w3-container w3-black">
+    <h1>Header</h1>
+</header>
+<body>
+    <h1>User List</h1>
+    <ul>
+        {% for user in users %}
+            <li>{{ user[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+<footer class="w3-container w3-black">
+    <h5>Footer</h5>
+    <p>Footer information goes here</p>
+</footer>
+</html>
