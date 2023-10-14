@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SFS Admin Login</title>
+	<!-- Link to an external CSS stylesheet for styling -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
 </head>
 
@@ -11,20 +12,24 @@
 	<header>
 	</header>
 	<div class="container3">
+		<!-- A button to go back to the previous page -->
         <button class="backbtn3" onclick="history.back()">Go Back</button>
 		<div class="form-section">
 			<div class="login-box">
-                <div class="texthead3">ADMIN,<br>You need to fix something.</div><br><br>
-                Please Enter your details
+                <!-- Welcome message for admin -->
+				<div class="texthead3">ADMIN,<br>You need to fix something.</div><br><br>
+				Please Enter your details
+                <!-- Form for admin login, submitting to the 'adminlogin' route -->
                 <form action="{{ url_for('adminlogin') }}" method="post">
 					<input type="Username" id="username" name="username" class="email elea" placeholder="User name"><br><br>
 					<input type="password" id="password" name="password" class="password elea" placeholder="password"><br><br>
+					<!-- Button to submit the admin login form -->
 					<button class="clkbtn" type="submit">Login</button>
 				</form>
 			</div>
-        
 		</div>
 	</div>
+	<!-- Link to an external JavaScript file (index.js) -->
 	<script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
-	</body>
+</body>
 </html>

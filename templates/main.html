@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Set the character encoding for the document -->
 	<meta charset="UTF-8">
+	<!-- Define the viewport for responsive design -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Set the title of the web page -->
 	<title>SFS Home Page</title>
+	<!-- Link to an external CSS stylesheet for styling -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
 </head>
 
 <body>
 	<header>
+		<!-- Header section -->
 	</header>
-	<p>Hello Welcome.</p>
+	<p>Hello Welcome.</p> <!-- Display a welcome message -->
 
-	<div class="transparent-bg"></div>
+	<div class="transparent-bg"></div> <!-- A transparent background overlay -->
 
-	<!-- container div -->
+	<!-- Container div that holds the content -->
 	<div class="container">
 
-		<!-- upper button section to select
-			the login or signup form -->
+		<!-- Upper button section to select login or signup form -->
 		<div class="slider"></div>
 		<div class="btn">
-			<button class="login">Customer</button>
-			<button class="signup">Agent</button>
+			<button class="login">Customer</button> <!-- Button to select Customer login -->
+			<button class="signup">Agent</button> <!-- Button to select Agent login -->
 		</div>
 
-		<!-- Form section that contains the
-			login and the signup form -->
-        
+		<!-- Form section that contains login and signup forms -->
 		<div class="form-section">
-			<!-- login form -->
+			<!-- Login form for customers -->
 			<div class="cust-box">
-                Welcome Customer, We need you!
-				<button class="clkbtn"><a href="{{ url_for('Custlogin') }}">Login</a></button>
-				<button class="clkbtn"><a href="{{ url_for('Custregister') }}">Signup</a></button>
-				</div>
-
-			<!-- signup form -->
-			<div class="agent-box1">
-                    Welcome Agent, we need you!
-                <button class="clkbtn"><a href="{{ url_for('Agentlogin') }}">Login</a></button>
-				<button class="clkbtn"><a href="{{ url_for('Agentregister') }}">Signup</a></button>    
+				Welcome Customer, We need you!
+				<button class="clkbtn"><a href="{{ url_for('Custlogin') }}">Login</a></button> <!-- Button to navigate to the Customer login page -->
+				<button class="clkbtn"><a href="{{ url_for('Custregister') }}">Signup</a></button> <!-- Button to navigate to the Customer signup page -->
 			</div>
+
+			<!-- Login form for agents -->
+			<div class="agent-box1">
+				Welcome Agent, we need you!
+				<button class="clkbtn"><a href="{{ url_for('Agentlogin') }}">Login</a></button> <!-- Button to navigate to the Agent login page -->
+				<button class="clkbtn"><a href="{{ url_for('Agentregister') }}">Signup</a></button> <!-- Button to navigate to the Agent signup page -->
 			</div>
 		</div>
 	</div>
-	<script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+	<script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script> <!-- Link to a JavaScript file -->
+
 </body>
 <footer>
-	<button class="admin_clkbtn"><a href="{{ url_for('Agentregister') }}">Are you an admin. Click ME.</a></button>
+	<!-- Footer section -->
+	<button class="admin_clkbtn"><a href="{{ url_for('Agentregister') }}">Are you an admin. Click ME.</a></button> <!-- Button for admin login -->
 </footer>
 </html>

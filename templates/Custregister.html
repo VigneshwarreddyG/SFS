@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SFS Customer Signup</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFS Customer Signup</title>
+    <!-- Link to an external CSS stylesheet for styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
 </head>
 
 <body>
-	<header>
-	</header>
+    <header>
+    </header>
     <div class="container2reg">
+        <!-- A button to go back to the previous page -->
         <button class="backbtn1" onclick="history.back()">Go Back</button>
         <br><br><br>
         <div class="form-section1">
-            <!-- login form -->
+            <!-- Registration form for customer signup -->
             <div class="login-box">
                 <div class="texthead1">Where were you 🥲?, Fill Up!</div><br><br>
                 Please Enter your details
+                <!-- Form for customer registration, submitting to the 'customerregister' route -->
                 <form action="{{ url_for('customerregister') }}" method="post">
-                    <input type="text" class="elen" placeholder="Enter your name" id="username" name="username" ><br><br>
+                    <input type="text" class="elen" placeholder="Enter your name" id="username" name="username"><br><br>
                     <input type="email" class="elen" placeholder="youremail@email.com" id="email" name="email"><br><br>
-                    <input type="password" class=" elen" placeholder="password" id="password" name="password"><br><br>
-                    <input type="password" class=" elen" placeholder="Confirm password" id="cpassword" name="cpassword"><br><br>
+                    <input type="password" class="elen" placeholder="password" id="password" name="password"><br><br>
+                    <input type="password" class="elen" placeholder="Confirm password" id="cpassword" name="cpassword"><br><br>
+                    <!-- Button to submit the customer registration form -->
                     <button class="clkbtn" type="submit">Signup</button>
                 </form>
             </div>
-        
         </div>
     </div>
+    <!-- Link to an external JavaScript file (index.js) -->
     <script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
-
-
