@@ -19,18 +19,19 @@ def index():
     cursor.close()
     return render_template('main.html', users=users)
 
-@app.route('/Custregister',methods=['POST','GET'])
-def Custregister():
+@app.route('/Custregisterhtml',methods=['POST','GET'])
+def Custregisterhtml():
     return render_template('Custregister.html')
-@app.route('/Custlogin',methods=['POST','GET'])
-def Custlogin():
+@app.route('/Custloginhtml',methods=['POST','GET'])
+def Custloginhtml():
     return render_template('Custlogin.html')
-@app.route('/Agentlogin',methods=['POST','GET'])
-def Agentlogin():
+@app.route('/Ageloginhtml',methods=['POST','GET'])
+def Agentloginhtml():
     return render_template('Agentlogin.html')
-@app.route('/Ageregister',methods=['POST','GET'])
-def Ageregister():
+@app.route('/Ageregisterhtml',methods=['POST','GET'])
+def Ageregisterhtml():
     return render_template('Agentregister.html')
+
 @app.route('/Admin',methods=['POST','GET'])
 def Adminlogin():
     return render_template('Adminlogin.html')
@@ -92,35 +93,6 @@ def customerregister():
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('Custregister.html', msg = msg)
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-@app.route('/agentlogin', methods =['GET', 'POST'])
-def agentlogin():
-    msg = ''
-    print(request.method)
-    print(request.form)
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        username = request.form['username']
-        password = request.form['password']
-        cursor = mysql.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
-        account = cursor.fetchone()
-        cursor.close()
-        print(account,"Hello 123789")
-        if account:
-            if account[7] != 'agent':
-                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
-            if username == account[3] and password == account[6]:
-                msg = 'Logged in successfully !'
-                return render_template('index.html', msg = msg)
-            else:
-                msg = 'Incorrect username / password !'
-                return render_template('Agentlogin.html', msg = msg)
-        else:
-            return render_template('main.html',msg='Username or Password is incorrect!')
-    
 
 @app.route('/agentregister', methods =['GET', 'POST'])
 def agentregister():
@@ -155,10 +127,36 @@ def agentregister():
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('Agentregister.html', msg = msg)
+
+@app.route('/agentlogin', methods =['GET', 'POST'])
+def agentlogin():
+    msg = ''
+    print(request.method)
+    print(request.form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        cursor = mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
+        account = cursor.fetchone()
+        cursor.close()
+        print(account,"Hello 123789")
+        if account:
+            if account[7] != 'agent':
+                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
+            if username == account[3] and password == account[6]:
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg = msg)
+            else:
+                msg = 'Incorrect username / password !'
+                return render_template('Agentlogin.html', msg = msg)
+        else:
+            return render_template('main.html',msg='Username or Password is incorrect!')
+    
     
 
 @app.route('/adminlogin', methods =['GET', 'POST'])
-def Adminlogin():
+def adminlogin():
     msg = ''
     print(request.method)
     print(request.form)

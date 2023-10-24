@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SFS Customer Signup</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
-	<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SFS Agent Signup</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    </head>
+    
+    <body>
         <header>
             <img src="static/logo.png" alt="logo SFS" width="50" height="40" class="background-removal" align="left">
             <p class="logo-title">Service Fullfilment System</p>
@@ -13,11 +15,11 @@
         <div class="container2reg">
             <button class="backbtn1" onclick="history.back()">Go Back</button>
                 <div class="texthead1">Where were you 🥲?, Fill Up!</div><br><br>
-                    <p class="Heading1" align="center">Please Enter your details</p><br>
-                 <form action="{{ url_for('agentregister') }}" method="post">
+                <p class="Heading1" align="center">Please Enter your details</p><br>
+                    <form action="{{ url_for('agentregister') }}" method="post">
                     <div class="parent">
                         <div class="div1">
-                       <div class="left-side">
+                        <div class="left-side">
                         <input type="text" class="elen" placeholder="Enter your first name" id="fname" name="fname" ><br><br>
                         <input type="text" class="elen" placeholder="Enter your Address" id="address" name="address" ><br><br>
                         <input type="text" class="elen" placeholder="Enter your Phone Number" id="phone" name="phone" ><br><br>
@@ -36,8 +38,6 @@
                      </div>
                     </div>
                 </form>
-        </div>
         <script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
     </body>
     </html>
-
