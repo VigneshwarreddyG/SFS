@@ -1,57 +1,80 @@
-from flask import Flask, render_template, request, redirect, url_for,session
-from flask_mysql_connector import MySQL
+from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
-import MySQLdb.cursors
-app = Flask(__name__, static_url_path='/static')
 import re
-app.secret_key = 'your secret key'
-from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+
 # MySQL configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Vigneshwar@94'
-app.config['MYSQL_DB'] = 'login'
-mysql = MySQL(app)
+mysql = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Vigneshwar@94",
+    database="SFS"
+)
 @app.route('/',methods=['POST','GET'])
 def index():
-    cursor =  mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor =  mysql.cursor()
     cursor.execute("SELECT * FROM accounts")
     users = cursor.fetchall()
     cursor.close()
     return render_template('main.html', users=users)
 
+@app.route('/Custregister',methods=['POST','GET'])
+def Custregister():
+    return render_template('Custregister.html')
+@app.route('/Custlogin',methods=['POST','GET'])
+def Custlogin():
+    return render_template('Custlogin.html')
+@app.route('/Agentlogin',methods=['POST','GET'])
+def Agentlogin():
+    return render_template('Agentlogin.html')
+@app.route('/Ageregister',methods=['POST','GET'])
+def Ageregister():
+    return render_template('Agentregister.html')
+@app.route('/Admin',methods=['POST','GET'])
+def Adminlogin():
+    return render_template('Adminlogin.html')
+
+
 @app.route('/customerlogin', methods =['GET', 'POST'])
 def customerlogin():
-    msg = ''
-    print(request.method)
-    print(request.form)
+    msg=''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
+        cursor = mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
         account = cursor.fetchone()
-        print(account)
+        cursor.close()
+        print(account,"Hello 123789")
         if account:
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            msg = 'Logged in successfully !'
-            return render_template('index.html', msg = msg)
+            if account[7] != 'customer':
+                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
+            if username == account[3] and password == account[6]:
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg = msg)
+            else:
+                msg = 'Incorrect username / password !'
+                return render_template('Custlogin.html', msg = msg)
         else:
-            msg = 'Incorrect username / password !'
-    return render_template('Custlogin.html', msg = msg)
+            return render_template('main.html',msg='Username or Password is incorrect!')
 
 @app.route('/customerregister', methods =['GET', 'POST'])
-def Customerregister():
+def customerregister():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'fname' in request.form  and 'lname' in request.form and 'email' in request.form and 'phone' in request.form and 'address' in request.form :
+        fname = request.form['fname']
+        lname = request.form['lname']
+        address = request.form['address']
         username = request.form['username']
-        password = request.form['password']
+        phone = request.form['phone']
         email = request.form['email']
-        cursor =  mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM accounts WHERE username = % s', (username, ))
+        password = request.form['password']
+        print(fname,lname,address,username,phone,email,password)
+        cursor =  mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
         account = cursor.fetchone()
+        print(account)
         if account:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -61,10 +84,11 @@ def Customerregister():
         elif not username or not password or not email:
             msg = 'Please fill out the form !'
         else:
-            cursor.execute("INSERT INTO accounts (username, email,password) VALUES (%s, %s,%s)", (username, email,password))
-            mysql.connection.commit()
+            cursor.execute("INSERT INTO accounts (fname,lname,address,username,phone,email,pass,usertype) VALUES (%s, %s,%s,%s, %s,%s,%s, %s)", (fname,lname,address,username,phone,email,password,"customer"))
+            mysql.commit()
             msg = 'You have successfully registered !'
             return render_template('Custlogin.html', msg = msg)
+        cursor.close()
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('Custregister.html', msg = msg)
@@ -80,31 +104,40 @@ def agentlogin():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM agent_accounts WHERE username = % s AND password = % s', (username, password, ))
+        cursor = mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
         account = cursor.fetchone()
-        print(account)
+        cursor.close()
+        print(account,"Hello 123789")
         if account:
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            msg = 'Logged in successfully !'
-            return render_template('index.html', msg = msg)
+            if account[7] != 'agent':
+                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
+            if username == account[3] and password == account[6]:
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg = msg)
+            else:
+                msg = 'Incorrect username / password !'
+                return render_template('Agentlogin.html', msg = msg)
         else:
-            msg = 'Incorrect username / password !'
-    return render_template('Agentlogin.html', msg = msg)
-
+            return render_template('main.html',msg='Username or Password is incorrect!')
+    
 
 @app.route('/agentregister', methods =['GET', 'POST'])
-def Agentregister():
+def agentregister():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form :
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'fname' in request.form  and 'lname' in request.form and 'email' in request.form and 'phone' in request.form and 'address' in request.form :
+        fname = request.form['fname']
+        lname = request.form['lname']
+        address = request.form['address']
         username = request.form['username']
-        password = request.form['password']
+        phone = request.form['phone']
         email = request.form['email']
-        cursor =  mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM agent_accounts WHERE username = % s', (username, ))
+        password = request.form['password']
+        print(fname,lname,address,username,phone,email,password)
+        cursor =  mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
         account = cursor.fetchone()
+        print(account)
         if account:
             msg = 'Account already exists !'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -114,35 +147,41 @@ def Agentregister():
         elif not username or not password or not email:
             msg = 'Please fill out the form !'
         else:
-            cursor.execute("INSERT INTO agent_accounts (username, email,password) VALUES (%s, %s,%s)", (username, email,password))
-            mysql.connection.commit()
+            cursor.execute("INSERT INTO accounts (fname,lname,address,username,phone,email,pass,usertype) VALUES (%s, %s,%s,%s, %s,%s,%s, %s)", (fname,lname,address,username,phone,email,password,"agent"))
+            mysql.commit()
             msg = 'You have successfully registered !'
             return render_template('Agentlogin.html', msg = msg)
+        cursor.close()
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('Agentregister.html', msg = msg)
+    
 
 @app.route('/adminlogin', methods =['GET', 'POST'])
-def adminlogin():
+def Adminlogin():
     msg = ''
     print(request.method)
     print(request.form)
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM admin WHERE username = % s AND password = % s', (username, password, ))
+        cursor = mysql.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
         account = cursor.fetchone()
-        print(account)
+        cursor.close()
+        print(account,"Hello 123789")
         if account:
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            msg = 'Logged in successfully !'
-            return render_template('index.html', msg = msg)
+            if account[7] != 'admin':
+                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
+            if username == account[3] and password == account[6]:
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg = msg)
+            else:
+                msg = 'Incorrect username / password !'
+                return render_template('main.html', msg = msg)
         else:
-            msg = 'Incorrect username / password !'
-    return render_template('Adminlogin.html', msg = msg)
+            return render_template('main.html',msg='Username or Password is incorrect!')
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -16,9 +16,15 @@ body {
 	align-items: center;
 	flex-direction: column;
 	gap: 30px;
-	background-image: url('https://img.freepik.com/free-vector/abstract-watercolor-background_23-2149069668.jpg?w=1800&t=st=1697063112~exp=1697063712~hmac=4f752edc40ea47566122c0c5d5c1d045124fe6ae2d70807d676f056b47433f5b');
+	background-image: linear-gradient(to top, rgba(255, 195, 110, 0.766), rgb(243, 135, 3));
 	background-size: cover;
 }
+
+
+    .background-removal {
+        border: 2px solid black;
+        opacity: 0.8;
+    }
 
 header {
 	width: 100%;
@@ -27,10 +33,18 @@ header {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
+	padding-top: 10px;
 }
 
 .heading {
 	color: green;
+}
+
+.logo-title {
+	font-family: "Papyrus", "Courier New", fantasy;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: white;
 }
 
 .title {
@@ -54,15 +68,42 @@ header {
 	position: relative;
 	overflow: hidden;
 }
+.parent {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	}
+	
+	.div1 { grid-area: 1 / 1 / 2 / 2; }
+	.div2 { grid-area: 1 / 2 / 2 / 3; }
 
 .container2reg {
 	height: 700px;
-	width: 500px;
-	background-color: rgb(255, 255, 255);
+	width: 1000px;
+	margin: 20px;
+	background-color: white;
 	box-shadow: 8px 8px 20px rgb(128, 128, 128);
-	position: relative;
-	overflow: hidden;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
 }
+
+.left-side {
+    padding: 20px;
+	margin-left: 10px;
+	
+}
+.right-side {
+    padding: 20px;
+	margin-left: -80px;
+}
+
+.input-group {
+    padding: auto;
+}
+
+
 
 .container3 {
 	height: 600px;
@@ -214,8 +255,9 @@ header {
 .agent-box,
 .login-box,
 .signup-box {
+	padding-top: 40px;
 	height: 100%;
-	width: 500px;
+	width: 600px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -256,6 +298,19 @@ header {
 	padding-left: 30px;
 	font-size: 18px;
 }
+.clkbtn1 {
+	height: 60px;
+	width: 150px;
+	border-radius: 50px;
+	background-image: linear-gradient(to right,
+			rgb(255, 195, 110),
+			rgb(255, 146, 91));
+	font-size: 22px;
+	border: none;
+	cursor: pointer;
+	align-items: center;
+	margin-left: 400px;
+}
 
 .clkbtn {
 	height: 60px;
@@ -267,6 +322,7 @@ header {
 	font-size: 22px;
 	border: none;
 	cursor: pointer;
+	align-items: center;
 }
 
 .admin_clkbtn {
@@ -339,6 +395,8 @@ a:hover {
 }
 .texthead1 {
 	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
     height:70px;
 	/* margin-left: 00px;  s */
 	width: 450px;
@@ -347,11 +405,18 @@ a:hover {
 			rgb(255, 195, 110),
 			rgb(255, 146, 91));
 	font-size: 20px;
-    padding: 10px;
     text-align: center;
     cursor: default;
 	border: 10px;
+	padding: 15px;
 }
+.parent {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	}
 .texthead3 {
 	margin-top: 20px;
     height:70px;

@@ -4,11 +4,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SFS Agent Login</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
 </head>
 
 <body>
 	<header>
+		<img src="static/logo.png" alt="logo SFS" width="50" height="40" class="background-removal" align="left">
+		<p class="logo-title">Service Fullfilment System</p>
 	</header>
 	<div class="container3">
         <button class="backbtn3" onclick="history.back()">Go Back</button>
@@ -16,7 +18,7 @@
 			<div class="login-box">
                 <div class="texthead3">Welcome Back Agent,<br>We will work and make together!</div><br><br>
                 Please Enter your details
-                <form action="{{ url_for('agentlogin') }}" method="post">
+                <form method="post" action="/agentlogin">
 					<input type="Username" id="username" name="username" class="email elea" placeholder="User name"><br><br>
 					<input type="password" id="password" name="password" class="password elea" placeholder="password"><br><br>
 					<button class="clkbtn" type="submit">Login</button>

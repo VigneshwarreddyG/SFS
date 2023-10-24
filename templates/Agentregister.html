@@ -9,26 +9,35 @@
 
 <body>
 	<header>
+		<img src="static/logo.png" alt="logo SFS" width="50" height="40" class="background-removal" align="left">
+		<p class="logo-title">Service Fullfilment System</p>
 	</header>
     <div class="container2reg">
         <button class="backbtn1" onclick="history.back()">Go Back</button>
-        <br><br><br>
-        <div class="form-section1">
-            <!-- login form -->
-            <div class="login-box">
-                <div class="texthead1">Where were you 🥲?, Fill Up!</div><br><br>
-                Please Enter your details
-                <form action="{{ url_for('agentregister') }}" method="post">
-                    <input type="text" class="elen" placeholder="Enter your name" id="username" name="username" ><br><br>
-                    <input type="email" class="elen" placeholder="youremail@email.com" id="email" name="email"><br><br>
-                    <input type="password" class=" elen" placeholder="password" id="password" name="password"><br><br>
-                    <input type="password" class=" elen" placeholder="Confirm password" id="cpassword" name="cpassword"><br><br>
-                    <button class="clkbtn" type="submit">Signup</button>
-                </form>
-            </div>
-        
-        </div>
-    </div>
+            <div class="texthead1">Where were you 🥲?, Fill Up!</div><br><br>
+                <p class="Heading1" align="center">Please Enter your details</p><br>
+             <form action="{{ url_for('agentregister') }}" method="post">
+                <div class="parent">
+                    <div class="div1">
+                   <div class="left-side">
+                    <input type="text" class="elen" placeholder="Enter your first name" id="fname" name="fname" ><br><br>
+                    <input type="text" class="elen" placeholder="Enter your Address" id="address" name="address" ><br><br>
+                    <input type="text" class="elen" placeholder="Enter your Phone Number" id="phone" name="phone" ><br><br>
+                    <input type="text" class="elen" placeholder="Enter your username" id="username" name="username" ><br><br>
+                    </div></div>
+                    <button class="clkbtn1" type="submit">Signup</button>
+                    <div class="div2"> 
+               
+                          <div class="right-side">
+                        <input type="text" class="elen" placeholder="Enter your last name" id="lname" name="lname" ><br><br>
+                        <input type="email" class="elen" placeholder="youremail@email.com" id="email" name="email"><br><br>
+                        <input type="password" class=" elen" placeholder="password" id="password" name="password"><br><br>
+                        <input type="password" class=" elen" placeholder="Confirm password" id="cpassword" name="cpassword"><br><br>
+                         </div>
+                    </div>
+                 </div>
+                </div>
+            </form>
     <script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>

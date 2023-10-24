@@ -9,8 +9,9 @@
 
 <body>
 	<header>
+		<img src="static/logo.png" alt="logo SFS" width="50" height="40" class="background-removal" align="left">
+		<p class="logo-title">Service Fullfilment System</p>
 	</header>
-	<p>Hello Welcome.</p>
 
 	<div class="transparent-bg"></div>
 
@@ -48,6 +49,8 @@
 	<script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 <footer>
-	<button class="admin_clkbtn"><a href="{{ url_for('Agentregister') }}">Are you an admin. Click ME.</a></button>
+	<form action="{{ url_for('Adminlogin') }}" method="post">
+		<button class="admin_clkbtn" type="submit">Are you an admin. Click ME.</button>
+	</form>
 </footer>
 </html>
