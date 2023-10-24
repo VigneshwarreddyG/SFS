@@ -1,211 +1,244 @@
-/* Import the "Poppins" font from Google Fonts with various styles and weights */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url(
+"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* Reset the default margin, padding, and box-sizing for all HTML elements */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
 }
 
-/* Styles for the <body> element */
 body {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 30px;
-    background-image: url('https://img.freepik.com/free-vector/abstract-watercolor-background_23-2149069668.jpg?w=1800&t=st=1697063112~exp=1697063712~hmac=4f752edc40ea47566122c0c5d5c1d045124fe6ae2d70807d676f056b47433f5b');
-    background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 30px;
+	background-image: linear-gradient(to top, rgba(255, 195, 110, 0.766), rgb(243, 135, 3));
+	background-size: cover;
 }
 
-/* Styles for the <header> element */
+
+    .background-removal {
+        border: 2px solid black;
+        opacity: 0.8;
+    }
+
 header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding-top: 10px;
 }
 
-/* Styles for elements with the class "heading" */
 .heading {
-    color: green;
+	color: green;
 }
 
-/* Styles for elements with the class "title" */
+.logo-title {
+	font-family: "Papyrus", "Courier New", fantasy;
+	letter-spacing: 1px;
+	font-weight: bold;
+	color: white;
+}
+
 .title {
-    font-weight: 400;
-    letter-spacing: 1.5px;
+	font-weight: 400;
+	letter-spacing: 1.5px;
 }
 
-/* Styles for .container, .container2, .container2reg, and .container3 */
 .container {
-    height: 600px;
-    width: 500px;
-    background-color: white;
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
-    position: relative;
-    overflow: hidden;
+	height: 600px;
+	width: 500px;
+	background-color: white;
+	box-shadow: 8px 8px 20px rgb(128, 128, 128);
+	position: relative;
+	overflow: hidden;
 }
-
 .container2 {
-    height: 600px;
-    width: 500px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
-    position: relative;
-    overflow: hidden;
+	height: 600px;
+	width: 500px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 8px 8px 20px rgb(128, 128, 128);
+	position: relative;
+	overflow: hidden;
+}
+.parent {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	}
+	
+	.div1 { grid-area: 1 / 1 / 2 / 2; }
+	.div2 { grid-area: 1 / 2 / 2 / 3; }
+
+.container2reg {
+	height: 700px;
+	width: 1000px;
+	margin: 20px;
+	background-color: white;
+	box-shadow: 8px 8px 20px rgb(128, 128, 128);
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
 }
 
-container2reg {
-    height: 700px;
-    width: 500px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
-    position: relative;
-    overflow: hidden;
-}
-
-container3 {
-    height: 600px;
-    width: 500px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 8px 8px 20px rgb(128, 128, 128);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Styles for elements with the class "btn" */
-.btn {
-    height: 60px;
-    width: 300px;
-    margin: 20px auto;
-    box-shadow: 10px 10px 30px rgb(254, 215, 188);
-    border-radius: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-/* Styles for elements with the classes "login" and "signup" */
-.login, .signup {
-    font-size: 22px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Styles for elements with the class "slider" */
-.slider {
-    height: 60px;
-    width: 150px;
-    border-radius: 50px;
-    background-image: linear-gradient(to right, rgb(255, 195, 110), rgb(255, 146, 91));
-    position: absolute;
-    top: 20px;
-    left: 100px;
-    transition: all 0.5s ease-in-out;
-}
-
-/* Additional styles for elements */
-.moveslider {
-    left: 250px;
-}
-
-.custreg-container {
-    border: 3px solid green;
-}
-
-.border {
-    border: 2px solid pink;
-}
-
-.signupboxcustomer {
-    width: 600px;
-    height: 1000px;
+.left-side {
     padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	margin-left: 10px;
+	
+}
+.right-side {
+    padding: 20px;
+	margin-left: -80px;
 }
 
-/* Styles for specific input elements with the "elen" class */
-.elen {
-    width: 400px;
-    height: 60px;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 40px;
-    margin-left: 40px;
+.input-group {
+    padding: auto;
 }
 
-/* Styles for the back button */
-.backbtn3 {
-    margin-top: 15px;
-    margin-left: 5px;
-    position: left;
-    height: auto;
-    width: auto;
-    border-radius: 50px;
-    background-image: linear-gradient(to right, rgb(241, 239, 237), rgb(255, 251, 250));
-    font-size: 16px;
-    padding: 5px;
-    border-color: grey;
-    cursor: pointer;
+
+
+.container3 {
+	height: 600px;
+	width: 500px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 8px 8px 20px rgb(128, 128, 128);
+	position: relative;
+	overflow: hidden;
+}
+.btn {
+	height: 60px;
+	width: 300px;
+	margin: 20px auto;
+	box-shadow: 10px 10px 30px rgb(254, 215, 188);
+	border-radius: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
-/* More specific input styles */
-.elen3 {
-    width: 400px;
-    height: 60px;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(179, 114, 114, 0.3);
+.login,
+.signup {
+	font-size: 22px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	position: relative;
+	cursor: pointer;
 }
 
-.elea {
-    width: 400px;
-    height: 60px;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 40px;
+.slider {
+	height: 60px;
+	width: 150px;
+	border-radius: 50px;
+	background-image: linear-gradient(to right,
+			rgb(255, 195, 110),
+			rgb(255, 146, 91));
+	position: absolute;
+	top: 20px;
+	left: 100px;
+	transition: all 0.5s ease-in-out;
 }
 
-/* Styles for form sections */
+.moveslider {
+	left: 250px;
+}
+.custreg-container{
+	border:green  3px;
+
+}
+.border{
+	border: 2px pink;
+	 
+}
+.signupboxcustomer{
+	/* background-color: rgb(80, 197, 109) ; */
+	width: 600px;
+	height: 1000px;
+	padding: 20px;
+	margin-top: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+.elen{/* CSS for a specific input with the "large-input" class */
+	
+	  width: 400px;
+	  height: 60px;
+	  padding: 12px;
+	  font-size: 18px;
+	  border-radius: 40px;
+	  /* background-color: aqua; */
+	  margin-left: 40px;
+	  
+	}
+	.backbtn3{ margin-top: 15px;
+		margin-left: 5px;
+		position: left;
+		height: auto;
+		width: auto;
+		border-radius: 50px;
+		background-image: linear-gradient(to right,
+				rgb(241, 239, 237),
+				rgb(255, 251, 250));
+		font-size: 16px;
+		padding: 5px;
+		border-color: grey;
+		cursor: pointer;
+	}
+
+	
+	.elen3{/* CSS for a specific input with the "large-input" class */
+	
+		width: 400px;
+		height: 60px;
+		padding: 12px;
+		font-size: 18px;
+		border-radius: 40px;
+		/* background-color: rgb(126, 251, 10); */
+		box-shadow: 0 0 10px rgba(179, 114, 114, 0.3);
+		
+	  }
+	.elea{ width: 400px;
+		height: 60px;
+		padding: 12px;
+		font-size: 18px;
+		border-radius: 40px;
+		/* background-color: aqua; */
+
+	}
+	
+	/* border: 2px green; */
+
 .form-section {
-    border: 2px solid pink;
-    height: 500px;
-    width: 1000px;
-    padding: 20px 0;
-    display: flex;
-    position: relative;
-    transition: all 0.5s ease-in-out;
-    left: 0px;
+	border: 2px pink;
+	height: 500px;
+	width: 1000px;
+	padding: 20px 0;
+	display: flex;
+	position: relative;
+	transition: all 0.5s ease-in-out;
+	left: 0px;
 }
+.form-section1{border: 2px pink;
+	height: 500px;
+	width: 1000px;
+	padding: 20px 0;
+	display: flex;
+	position: relative;
+	transition: all 0.5s ease-in-out;
+	left: 0px;
 
-.form-section1 {
-    border: 2px solid pink;
-    height: 500px;
-    width: 1000px;
-    padding: 20px 0;
-    display: flex;
-    position: relative;
-    transition: all 0.5s ease-in-out;
-    left: 0px;
 }
-
-/* Styles for moving the form section */
 .form-section-move {
-    left: -600px;
+	left: -600px;
 }
-
 
 .cust-box{	height: 100%;
 	width: 550px;
@@ -222,8 +255,9 @@ container3 {
 .agent-box,
 .login-box,
 .signup-box {
+	padding-top: 40px;
 	height: 100%;
-	width: 500px;
+	width: 600px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -264,6 +298,19 @@ container3 {
 	padding-left: 30px;
 	font-size: 18px;
 }
+.clkbtn1 {
+	height: 60px;
+	width: 150px;
+	border-radius: 50px;
+	background-image: linear-gradient(to right,
+			rgb(255, 195, 110),
+			rgb(255, 146, 91));
+	font-size: 22px;
+	border: none;
+	cursor: pointer;
+	align-items: center;
+	margin-left: 400px;
+}
 
 .clkbtn {
 	height: 60px;
@@ -275,6 +322,7 @@ container3 {
 	font-size: 22px;
 	border: none;
 	cursor: pointer;
+	align-items: center;
 }
 
 .admin_clkbtn {
@@ -347,6 +395,8 @@ a:hover {
 }
 .texthead1 {
 	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
     height:70px;
 	/* margin-left: 00px;  s */
 	width: 450px;
@@ -355,11 +405,18 @@ a:hover {
 			rgb(255, 195, 110),
 			rgb(255, 146, 91));
 	font-size: 20px;
-    padding: 10px;
     text-align: center;
     cursor: default;
 	border: 10px;
+	padding: 15px;
 }
+.parent {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	}
 .texthead3 {
 	margin-top: 20px;
     height:70px;

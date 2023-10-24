@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, User</h1>
+        <a href="/logout">Logout</a>
+    </header>
+
+    <!-- Customer Section -->
+    <section id="customer-section">
+        <h2>Customer Dashboard</h2>
+        <h3>Create Job</h3>
+        <form action="/create_job" method="post">
+            <label for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" name="jobTitle" required>
+            <label for="jobDescription">Job Description:</label>
+            <textarea id="jobDescription" name="jobDescription" required></textarea>
+            <button type="submit">Submit Job</button>
+        </form>
+    </section>
+
+    <!-- Agent Section -->
+    <section id="agent-section">
+        <h2>Agent Dashboard</h2>
+        <h3>Job Assignments</h3>
+        <ul>
+            <li>Job 1: Some details about Job 1 <a href="/accept_job/1">Accept</a></li>
+            <li>Job 2: Some details about Job 2 <a href="/accept_job/2">Accept</a></li>
+            <!-- Add more job assignments here -->
+        </ul>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="admin-section">
+        <h2>Admin Dashboard</h2>
+        <h3>User Management</h3>
+        <ul>
+            <li><a href="/create_agent">Create Agent</a></li>
+            <li><a href="/manage_customers">Manage Customers</a></li>
+            <!-- Add more admin actions here -->
+        </ul>
+    </section>
+</body>
+</html>

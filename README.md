@@ -1,2 +1,2 @@
 # SFS
-Hii All,this is first sprint code.
+Hii All,this is first psd homework
