@@ -22,12 +22,15 @@ def index():
 @app.route('/Custregisterhtml',methods=['POST','GET'])
 def Custregisterhtml():
     return render_template('Custregister.html')
+
 @app.route('/Custloginhtml',methods=['POST','GET'])
 def Custloginhtml():
     return render_template('Custlogin.html')
+
 @app.route('/Ageloginhtml',methods=['POST','GET'])
 def Agentloginhtml():
     return render_template('Agentlogin.html')
+
 @app.route('/Ageregisterhtml',methods=['POST','GET'])
 def Ageregisterhtml():
     return render_template('Agentregister.html')
@@ -49,16 +52,20 @@ def customerlogin():
         cursor.close()
         print(account,"Hello 123789")
         if account:
-            if account[7] != 'customer':
-                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
+            # if account[7] != 'customer':
+            #     return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
             if username == account[3] and password == account[6]:
                 msg = 'Logged in successfully !'
-                return render_template('index.html', msg = msg)
+                return render_template('CustomerDashboard.html', msg = msg)
             else:
                 msg = 'Incorrect username / password !'
                 return render_template('Custlogin.html', msg = msg)
         else:
             return render_template('main.html',msg='Username or Password is incorrect!')
+
+@app.route('/groceryservice', methods =['GET', 'POST'])
+def groceryservice():
+    return render_template('groceryservice.html')
 
 @app.route('/customerregister', methods =['GET', 'POST'])
 def customerregister():
@@ -153,7 +160,93 @@ def agentlogin():
         else:
             return render_template('main.html',msg='Username or Password is incorrect!')
     
+@app.route('/Carbooking')
+def Carbooking():
+    return render_template('Carbooking.html')
+
+@app.route('/Accomodationservice')
+def Accomodationservice():
+    return render_template('Accomodationservice.html')
+
+@app.route('/Accomodationserviceform', methods=['POST'])
+def Accomodationserviceform():
+    if request.method == 'POST':
+        nameofcustomer = request.form['nameofcustomer']
+        ApartmentDetails = request.form['ApartmentDetails']
+        members = request.form['members']
+        location = request.form['location']
+        movein = request.form['movein']
+        insert_query = "INSERT INTO accomodationservice (nameofcustomer, ApartmentDetails, members, location, movein) VALUES (%s, %s, %s, %s, %s)"
+        values = (nameofcustomer, ApartmentDetails, members, location, movein)
+        cursor = mysql.cursor()
+        cursor.execute(insert_query, values)
+        mysql.commit()
+        return redirect(url_for('customer_dashboard'))
+        
+@app.route('/Groceryserviceform', methods=['POST'])
+def Groceryserviceform():
+    if request.method == 'POST':
+        nameofcustomer = request.form['nameofcustomer']
+        items = request.form.getlist('items[]')
+        quantities = request.form.getlist('quantities[]')
+        pickupTime = request.form['pickupTime']
+        dropTime=request.form['dropTime']
+        cursor = mysql.cursor()
+        for item, quantity in zip(items, quantities):
+            cursor.execute("INSERT INTO groceries (Nameofcustomer,item, quantity,pickupTime,dropTime) VALUES (%s, %s,%s,%s,%s)", (nameofcustomer,item, quantity,pickupTime,dropTime))
+        mysql.commit()
+        cursor.close()
+    return redirect(url_for('customer_dashboard'))
+
+
+@app.route('/Carserviceform', methods=['POST'])
+def Carserviceform():
+    if request.method == 'POST':
+        nameofcustomer = request.form['nameofcustomer']
+        carModel = request.form['carModel']
+        paymentInfo = request.form['paymentInfo']
+        modelNumber = request.form['modelNumber']
+        appointmentDate = request.form['appointmentDate']
+        pickupTime = request.form['pickupTime']
+        dropTime=request.form['dropTime']
+        # Insert the form data into the MySQL database
+        query = "INSERT INTO car_service (nameofcustomer,carModel, paymentInfo, modelNumber, appointmentDate,pickupTime,dropTime) VALUES (%s,%s, %s, %s, %s,%s,%s)"
+        values = (nameofcustomer,carModel, paymentInfo, modelNumber, appointmentDate,pickupTime,dropTime)
+        cursor = mysql.cursor()
+        cursor.execute(query, values)
+        mysql.commit()
+        return redirect(url_for('customer_dashboard'))
     
+@app.route('/customer_dashboard')
+def customer_dashboard():
+    return render_template('CustomerDashboard.html')
+
+@app.route('/Accomodationlist')
+def Accomodationlist():
+        cursor = mysql.cursor()
+        cursor.execute("SELECT nameofcustomer, ApartmentDetails, members, location,movein FROM accomodationservice")
+        booking_data = cursor.fetchall()
+        print(booking_data)
+        cursor.close()
+        return render_template('Accomdationlist.html',data=booking_data)
+
+@app.route('/Carbookinglist')
+def Carbookinglist():
+        cursor = mysql.cursor()
+        cursor.execute("SELECT carModel, paymentInfo, modelNumber, appointmentDate,pickupTime,dropTime,nameofcustomer FROM car_service")
+        booking_data = cursor.fetchall()
+        print(booking_data)
+        cursor.close()
+        return render_template('Carbookinglist.html',data=booking_data)
+
+@app.route('/grocerylist')
+def grocerylist():
+        cursor = mysql.cursor()
+        cursor.execute("SELECT Nameofcustomer,item, quantity,pickupTime,dropTime FROM groceries")
+        booking_data = cursor.fetchall()
+        print(booking_data)
+        cursor.close()
+        return render_template('groceryplans.html',data=booking_data)
 
 @app.route('/adminlogin', methods =['GET', 'POST'])
 def adminlogin():
@@ -173,7 +266,7 @@ def adminlogin():
                 return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
             if username == account[3] and password == account[6]:
                 msg = 'Logged in successfully !'
-                return render_template('index.html', msg = msg)
+                return render_template('CustomerDashboard.html', msg = msg)
             else:
                 msg = 'Incorrect username / password !'
                 return render_template('main.html', msg = msg)
@@ -183,3 +276,4 @@ def adminlogin():
 
 if __name__ == '__main__':
     app.run(debug=True)
+# print("Write you secret message here")
