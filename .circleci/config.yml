@@ -13,10 +13,6 @@ jobs:
           name: Install Dependencies
           command: pip install -r requirements.txt
       - run:
-          name: Run app
-          # This assumes pytest is installed via the install-package step above
-          command: python app.py
-      - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: pytest app_test.py
