@@ -1,4 +1,4 @@
-Python==3.11.5
+Python
 Flask==2.2.2
 Werkzeug==2.2.2
 mysql==14.14
