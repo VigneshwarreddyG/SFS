@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title color="black">Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='AdminDash.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showContent('home')">HOME</a></li>
+            <li><a href="#" onclick="showContent('dashboard')">DASHBOARD</a></li>
+            <li><a href="#" onclick="showContent('users')">USERS</a></li>
+            <li><a href="#" onclick="showContent('products')">PRODUCTS</a></li>
+            <li><a href="#" onclick="showContent('settings')">SETTINGS</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="home-content" class="dashboard-content" style="display: none;">
+            <h3>HOME</h3>
+            <p>Welcome to the admin dashboard. Here, you can manage users, products, and settings for your application. Use the navigation menu on the left to access different sections of the dashboard.</p>
+        </div>
+        <div id="dashboard-content" class="dashboard-content">
+            <h2>Welcome to the Admin Dashboard</h2>
+            <h3>Overview</h3>
+        </div>
+        <div id="users-content" class="dashboard-content" style="display: none;">
+            <h3>Users</h3>
+            <p>View and manage user accounts, roles, and permissions. You can add, edit, or delete user profiles, assign roles, and control access to various features.</p>
+            <ul>
+                <datatablelink>
+                    <a href="#" onclick="showContentTable('custtable')" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">customers</a>
+                  </datatablelink>
+                  <datatablelink>
+                    <a href="#" onclick="showContentTable('agenttable')" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">agents</a>
+                  </datatablelink>
+            </ul>
+            <div id="custtable" class="content">
+                <h4>Customer Table</h4>
+                <p>This is a table of all customers in the database.</p>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for j in customers %}
+                        <tr>
+                            <td>{{ j[0] }}</td>
+                            <td>{{ j[1] }}</td>
+                            <td>{{ j[2] }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_user', user_id=j[4]) }}" style="display: inline-block; padding: 10px 20px; background-color: rgba(255, 0, 0, 0.929); color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">Edit</a>
+                                <a href="{{ url_for('delete_user', user_id=j[4]) }}" style="display: inline-block; padding: 10px 20px; background-color: rgba(255, 0, 0, 0.898); color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="agenttable" class="content">
+                <h4>Agent Table</h4>
+                <p>This is a table of all agents in the database.</p>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for i in agents %}
+                        <tr>
+                            <td>{{ i[0] }}</td>
+                            <td>{{ i[1] }}</td>
+                            <td>{{ i[2] }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_user', user_id=i[4]) }}" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">Edit</a>
+                                <a href="{{ url_for('delete_user', user_id=i[4]) }}" style="display: inline-block; padding: 10px 20px; background-color: red; color: white; text-align: center; text-decoration: none; font-size: 16px; border-radius: 5px; cursor: pointer;">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div id="products-content" class="dashboard-content" style="display: none;">
+            <h3>Products</h3>
+            <p>Manage your product catalog. Add, edit, and delete products, set prices, and update product details. You can also track product inventory and sales data.</p>
+        </div>
+        <div id="settings-content" class="dashboard-content" style="display: none;">
+            <h3>Settings</h3>
+            <p>Adjust application settings, customize the appearance, and configure various options. Control how your admin dashboard functions and integrates with your application.</p>
+        </div>
+    </main>
+
+    <script>
+        function showContent(contentId) {
+            const contentSections = document.getElementsByClassName("dashboard-content");
+            for (let section of contentSections) {
+                section.style.display = "none";
+            }
+            const selectedContent = document.getElementById(contentId + "-content");
+            selectedContent.style.display = "block";
+        }
+        function showContentTable(contentId) {
+            // Hide all content elements
+            var contents = document.querySelectorAll('.content');
+            contents.forEach(function (content) {
+                content.style.display = 'none';
+            });
+
+            // Show the selected content
+            var selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

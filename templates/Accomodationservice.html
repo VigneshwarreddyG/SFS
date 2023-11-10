@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Service Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Carbooking.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/formstyles.css">
+</head>
+
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <form id="carServiceForm" action="{{ url_for('Accomodationserviceform')}}" method="post">
+                <div class="formbold-mb-5">
+                    <label for="NameoftheCustomer" class="formbold-form-label">NameoftheCustomer</label>
+                    <input type="text" id="nameofcustomer" name="nameofcustomer" class="formbold-form-input" placeholder="Enter Name of the Customer" required><br><br>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="ApartmentDetails" class="formbold-form-label">Apartment Details:</label>
+                    <input type="text" id="ApartmentDetails" name="ApartmentDetails" class="formbold-form-input" placeholder="Enter Type of the Apartment Details(Like 1b1b,2b1b,2b2b...etc)" required><br><br>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="members" class="formbold-form-label">HOW MANY MEMBERS:</label>
+                    <input type="text" id="members" name="members" class="formbold-form-input" placeholder="How many members to lease the Apartment" required><br><br>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="location" class="formbold-form-label">Location Prefrences:</label>
+                    <input type="text" id="location" name="location" class="formbold-form-input" placeholder="Enter Location Prefrences" required><br><br>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="movein" class="formbold-form-label">MoveIn Date:</label>
+                    <input type="date" id="movein" name="movein" class="formbold-form-input" placeholder="Can U Tell me the When U would like to Move in?" required><br><br>
+                </div>
+                
+                <div>
+                    <button type="submit" class="formbold-btn" onclick="showAlert">Book Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function showAlert() {
+            alert("Accomodations Details Booked Successfully");
+        }
+    </script>
+</body>
+</html>
+
