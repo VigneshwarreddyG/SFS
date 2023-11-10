@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Service Booking</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='Carbooking.css')}}">
+</head>
+
+<body>
+    <h1 align="center">Car Service Booking</h1>
+
+    <form id="carServiceForm"  method="post" action="{{url_for('Carbooking')}}">
+
+        
+        <label for="carModel">Car Model:</label>
+        <input type="text" id="carModel" name="carModel" placeholder="carModel"><br>
+
+        <label for="paymentInfo">Payment Information:</label>
+        <input type="text" id="paymentInfo" name="paymentInfo" placeholder="paymentInfo"><br>
+
+        <label for="modelNumber">Model Number:</label>
+        <input type="text" id="modelNumber" name="modelNumber" placeholder="modelNumber"><br>
+
+        <label for="appointmentDate">Appointment Date:</label>
+        <input type="date" id="appointmentDate" name="appointmentDate" placeholder="appointmentDate"><br>
+
+        <button type="submit" onclick="bookNow(event)">Book Now</button>
+    </form>
+
+    <div id="bookingDetails" style="display: none;">
+        <h2>Booking Details</h2>
+        
+        <p>Car Model: <span id="bookingCarModel"></span></p>
+        <p>Payment Information: <span id="bookingPaymentInfo"></span></p>
+        <p>Model Number: <span id="bookingModelNumber"></span></p>
+        <p>Appointment Date: <span id="bookingAppointmentDate"></span></p>
+
+    </div>
+    
+    <script>
+        function bookNow(event) {
+            event.preventDefault();
+         
+            const carModel = document.getElementById("carModel").value;
+            const paymentInfo = document.getElementById("paymentInfo").value;
+            const modelNumber = document.getElementById("modelNumber").value;
+            const appointmentDate = document.getElementById("appointmentDate").value;
+
+            // Display booking details
+            
+            document.getElementById("bookingCarModel").textContent = carModel;
+            document.getElementById("bookingPaymentInfo").textContent = paymentInfo;
+            document.getElementById("bookingModelNumber").textContent = modelNumber;
+            document.getElementById("bookingAppointmentDate").textContent = appointmentDate;
+
+            document.getElementById("bookingDetails").style.display = "block";
+        }
+    </script>
+</body>
+</html>

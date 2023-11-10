@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='agentdashboard.css') }}">
+</head>
+
+<body>
+    <h1>Agent Dashboard</h1>
+    
+    <table>
+        <tr>
+            
+            <th>Car Model</th>
+            <th>Payment Information</th>
+            <th>Model Number</th>
+            <th>Appointment Date</th>
+        
+        </tr>
+        {% for booking in booking_data %}
+        <tr>
+            <td>{{booking[0]}}</td>
+            <td>{{ booking[1]}}</td>
+            <td>{{ booking[2]}}</td>
+            <td>{{ booking[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
