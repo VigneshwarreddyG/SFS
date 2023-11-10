@@ -3,14 +3,14 @@ version: 2.1
 jobs:
   say-hello:
     docker:
-      - image: cimg/base:stable  # Add the version field for the Docker image
+      - image: python:3.8  # Example Python image that includes pip
     steps:
       - checkout
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
       - run:
-          name: Install Dependencies  # Fix the syntax error here
+          name: Install Dependencies
           command: pip install -r requirements.txt
 
 workflows:
