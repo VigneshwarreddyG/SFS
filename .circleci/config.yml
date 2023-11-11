@@ -13,6 +13,12 @@ jobs:
           name: Install Dependencies
           command: pip install -r requirements.txt
           steps:
+      # Set up MySQL database
+      - run:
+          name: Set up MySQL database
+          command: |
+            sudo apt-get install mysql-client
+            mysql -h localhost -u root -p Vigneshwar@94
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
