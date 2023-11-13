@@ -15,13 +15,14 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
       - run:
-          name: Install dependencies
+          name: Install MySQL Client
           command: |
-            pip install -r requirements.txt
+            sudo apt-get update
+            sudo apt-get install -y mysql-client
       - run:
-          name: "Database Test"
+          name: Run MySQL Query
           command: |
-            mysql -h 127.0.0.1 -u root -p'Vigneshwar@94' -e "SHOW TABLES;"
+            mysql -h 127.0.0.1 -u root -p"Vigneshwar@94" -e "SHOW TABLES;"
       - run:
           name: Run tests
           command: |
