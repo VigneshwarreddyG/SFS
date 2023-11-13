@@ -6,7 +6,7 @@ jobs:
       - image: python:3.8
       - image: mysql:8.0.33
         environment:
-          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_ROOT_PASSWORD: Vigneshwar@94
           MYSQL_DATABASE: SFS
           MYSQL_USER: root
           MYSQL_PASSWORD: Vigneshwar@94
