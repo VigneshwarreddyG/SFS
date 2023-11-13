@@ -1,12 +1,12 @@
 version: 2.1
 
 jobs:
-  say-hello:
+  build:
     docker:
-      - image: python:3.8  # Example Python image that includes pip
-      - image: cimg/mysql:8.0
+      - image: python:3.8
+      - image: mysql:8.0.33
         environment:
-          MYSQL_ROOT_PASSWORD: Vigneshwar@94
+          MYSQL_ROOT_PASSWORD: root_password
           MYSQL_DATABASE: SFS
           MYSQL_USER: root
           MYSQL_PASSWORD: Vigneshwar@94
@@ -16,37 +16,15 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
+          name: Install dependencies
           command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u root -pVigneshwar@94 test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u root -pVigneshwar@94 --execute="SELECT * FROM test_db.Persons"
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
-          steps:
-      # Set up MySQL database
-      - run:
-          name: Set up MySQL database
-          command: |
-            mysql -h localhost -u root -p Vigneshwar@94
+            pip install -r requirements.txt
       - run:
           name: Run tests
-          # This assumes pytest is installed via the install-package step above
-          command: pytest app_test.py
+          command: |
+            pytest app_test.py
+      - run:
+          name: Run Flask application
+          command: |
+            python app.py
 
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
