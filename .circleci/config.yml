@@ -19,6 +19,10 @@ jobs:
           command: |
             pip install -r requirements.txt
       - run:
+          name: "Database Test"
+          command: |
+            mysql -h 127.0.0.1 -u root -p'Vigneshwar@94' -e "SHOW TABLES;"
+      - run:
           name: Run tests
           command: |
             pytest app_test.py
