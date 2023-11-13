@@ -8,7 +8,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: Vigneshwar@94
           MYSQL_DATABASE: SFS
-          MYSQL_USER: root
           MYSQL_PASSWORD: Vigneshwar@94
     steps:
       - checkout
