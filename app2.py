@@ -11,9 +11,6 @@ mysql = mysql.connector.connect(
     password="Vigneshwar@94",
     database="SFS"
 )
-
-# Customer routes and functions from app.py...
-
 @app.route('/',methods=['POST','GET'])
 def index():
     cursor =  mysql.cursor()
@@ -42,9 +39,10 @@ def Ageregisterhtml():
 def Adminlogin():
     return render_template('Adminlogin.html')
 
+
 @app.route('/customerlogin', methods =['GET', 'POST'])
-def customerlogin(request):
-    msg = ''
+def customerlogin():
+    msg=''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
@@ -265,58 +263,17 @@ def adminlogin():
         print(account,"Hello 123789")
         if account:
             if account[7] != 'admin':
-                return render_template('Adminlogin.html', alert="Please login as a Customer to access this page!")
+                return render_template('Custlogin.html', alert="Please login as a Customer to access this page!")
             if username == account[3] and password == account[6]:
                 msg = 'Logged in successfully !'
-                return admin_dashboard()
+                return render_template('CustomerDashboard.html', msg = msg)
             else:
                 msg = 'Incorrect username / password !'
-                return admin_dashboard()
+                return render_template('main.html', msg = msg)
         else:
-            return admin_dashboard()
-
-# Admin routes and functions from admin_app.py...
-
-@app.route('/admin')
-def admin_dashboard():
-    # Fetch user data from the database
-    cur = mysql.cursor()
-    cur.execute("SELECT * FROM Accounts WHERE usertype = 'customer'")
-    customers = cur.fetchall()
-    print(customers)
-    cur.execute("SELECT * FROM Accounts WHERE usertype = 'agent'")
-    agents = cur.fetchall()
-    print(agents)
-    cur.close()
-    return render_template('AdminDashboard copy.html', customers=customers, agents=agents)
-
-@app.route('/admin/edit/<int:user_id>', methods=['GET', 'POST'])
-def admin_edit_user(user_id):
-    cur = mysql.cursor()
-
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-
-        cur.execute("UPDATE users SET name = %s, email = %s WHERE id = %s", (name, email, user_id))
-        mysql.commit()
-
-        return redirect(url_for('admin_dashboard'))
-
-    cur.execute("SELECT * FROM users WHERE id = %s", (user_id,))
-    user = cur.fetchone()
-    cur.close()
-    return render_template('admin_edit_user.html', user=user)
-
-@app.route('/admin/delete/<int:user_id>')
-def admin_delete_user(user_id):
-    cur = mysql.cursor()
-    cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
-    mysql.commit()
-    cur.close()
-    return redirect(url_for('admin_dashboard'))
-
-# ... (Continue with the rest of the code from app.py)
+            return render_template('main.html',msg='Username or Password is incorrect!')
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
+# print("Write you secret message here")
