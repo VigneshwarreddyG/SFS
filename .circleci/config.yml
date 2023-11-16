@@ -3,15 +3,20 @@ version: 2.1
 jobs:
   build_and_push:
     docker:
-      - image: cimg/python:3.8  # Using a Python 3.8 Docker image
+      - image: cimg/python:3.8
     steps:
-      - checkout  # Check out the source code
+      - checkout
       - setup_remote_docker:
-          version: 19.03.13  # Setting a remote Docker environment.
+          version: 19.03.13
       - run:
           name: Install Dependencies
-          command: pip install -r requirements.txt  # Installing the dependencies through the requirements text.
+          command: pip install -r requirements.txt
       - run:
           name: Run tests
-          command: pytest testoverallcode.py  # Run tests using pytestss
-      
+          command: pytest testoverallcode.py
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_and_push
