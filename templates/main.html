@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SFS Home Page</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+
+<body>
+	<header>
+		<img src="static/logo.png" alt="logo SFS" width="50" height="40" class="background-removal" align="left">
+		<p class="logo-title">Service Fullfilment System</p>
+	</header>
+
+	<div class="transparent-bg"></div>
+
+	<!-- container div -->
+	<div class="container">
+
+		<!-- upper button section to select
+			the login or signup form -->
+		<div class="slider"></div>
+		<div class="btn">
+			<button class="login">Customer</button>
+			<button class="signup">Agent</button>
+		</div>
+
+		<!-- Form section that contains the
+			login and the signup form -->
+        
+		<div class="form-section">
+			<!-- login form -->
+			<div class="cust-box">
+                Welcome Customer, We need you!
+				<button class="clkbtn"><a href="{{ url_for('Custloginhtml') }}">Login</a></button>
+				<button class="clkbtn"><a href="{{ url_for('Custregisterhtml') }}">Signup</a></button>
+				</div>
+
+			<!-- signup form -->
+			<div class="agent-box1">
+                    Welcome Agent, we need you!
+                <button class="clkbtn"><a href="{{ url_for('Agentloginhtml') }}">Login</a></button>
+				<button class="clkbtn"><a href="{{ url_for('Ageregisterhtml') }}">Signup</a></button>    
+			</div>
+			</div>
+		</div>
+	</div>
+	<script rel="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+<footer>
+	<form action="{{ url_for('Adminlogin') }}" method="post">
+		<button class="admin_clkbtn" type="submit">Are you an admin. Click ME.</button>
+	</form>
+</footer>
+</html>
