@@ -9,6 +9,10 @@ jobs:
       - setup_remote_docker:
           version: 19.03.13
       - run:
+          name: Update Pip
+          command: pip install --upgrade pip
+
+      - run:
           name: Install Dependencies
           command: pip install -r requirements.txt
       - run:
