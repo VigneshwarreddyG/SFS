@@ -16,8 +16,3 @@ jobs:
           name: Run tests
           command: |
             pytest custlogin_test.py
-      - run:
-          name: Run Flask application
-          command: |
-            python app.py
-
