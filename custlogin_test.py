@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 # Function to read and parse the HTML content from the file
 def get_html_content():
-    with open('/Users/gvigneshwarreddy/Desktop/GIT/SFS/templates/Custlogin.html', 'r') as file:
+    with open('{{ url_for('Custloginhtml') }}', 'r') as file:
         html_content = file.read()
         return BeautifulSoup(html_content, 'html.parser')
 
