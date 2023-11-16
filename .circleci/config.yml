@@ -4,11 +4,6 @@ jobs:
   build:
     docker:
       - image: python:3.8
-      - image: mysql:8.0.33
-        environment:
-          MYSQL_ROOT_PASSWORD: Vigneshwar@94
-          MYSQL_DATABASE: SFS
-          MYSQL_PASSWORD: Vigneshwar@94
     steps:
       - checkout
       - run:
@@ -18,13 +13,9 @@ jobs:
           name: Install Dependencies
           command: pip install -r requirements.txt
       - run:
-          name: Run MySQL Query
-          command: |
-            mysql -h 127.0.0.1 -u root -p"Vigneshwar@94" -e "SHOW TABLES;"
-      - run:
           name: Run tests
           command: |
-            pytest app_test.py
+            pytest custlogin_test.py
       - run:
           name: Run Flask application
           command: |
