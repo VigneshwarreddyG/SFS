@@ -4,7 +4,7 @@ import re
 
 app = Flask(__name__)
 
-# MySQL configuration
+# MySQL Configurations
 mysql = mysql.connector.connect(
     host="localhost",
     user="root",
