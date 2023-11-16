@@ -13,5 +13,5 @@ jobs:
           command: pip install -r requirements.txt  # Installing the dependencies through the requirements text.
       - run:
           name: Run tests
-          command: pytest testoverallcode.py  # Run tests using pytest
+          command: pytest testoverallcode.py  # Run tests using pytestss
       
