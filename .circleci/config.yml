@@ -13,6 +13,10 @@ jobs:
           name: Install Dependencies
           command: pip install -r requirements.txt
       - run:
-          name: Run tests
+          name: Run tests 1
           command: |
             pytest custlogin_test.py
+      - run:
+          name: Run tests 2
+          command: |
+            pytest Agentlogintest.py
