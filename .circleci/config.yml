@@ -11,8 +11,8 @@ jobs:
                 name: Install Dependencies
                 command: pip install -r requirements.txt
             - run:
-                name: "Say hello"
-                command: "echo Hello, World!"
+                name: "Say Welcome"
+                command: "echo Hello, This is SFS"
             - run:
                 name: Install Dependencies
                 command: pip install -r requirements.txt
