@@ -1,22 +1,43 @@
 version: 2.1
-
 jobs:
-  build:
-    docker:
-      - image: python:3.8
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-      - run:
-          name: Install Dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: Run tests 1
-          command: |
-            pytest custlogin_test.py
-      - run:
-          name: Run tests 2
-          command: |
-            pytest Agentlogintest.py
+    build_and_push:
+        docker:
+            - image: cimg/python:3.8
+        steps:
+            - checkout
+            - setup_remote_docker:
+                version: 19.03.13
+            - run:
+                name: Install Dependencies
+                command: pip install -r requirements.txt
+            - run:
+                name: "Say hello"
+                command: "echo Hello, World!"
+            - run:
+                name: Install Dependencies
+                command: pip install -r requirements.txt
+            - run:
+                name: Run tests 1
+                command: |
+                  pytest custlogin_test.py
+            - run:
+                name: Run tests 2
+                command: |
+                  pytest Agentlogintest.py
+            - run:
+                name: Docker build
+                command: docker build -t $DOCKERHUB_USERNAME/SFS:${CIRCLE_SHA1} .
+            - run:
+                name: Authenticate with Docker Hub
+                command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin
+            - run:
+                name: Push Docker Image to Docker Hub
+                command: docker push $DOCKERHUB_USERNAME/SFS:${CIRCLE_SHA1}
+workflows:
+    version: 2
+    build_and_deploy:
+        jobs:
+            - build_and_push:
+                filters:
+                    branches:
+                        only: main
