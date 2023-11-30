@@ -23,10 +23,15 @@ jobs:
                 command: |
                   pytest Agentlogintest.py
             - run:
-                  name: Build and Run Docker Container
-                  command: |
-                    docker build -t charanl
-                    docker run -p 5000:5000 charanl
+                  name: Docker build
+                  command: docker build -t $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1} .  # Build a Docker image with a tag based on the commit SHA1
+              - run:
+                  name: Authenticate with Docker Hub
+                  command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin  # Logging in to Docker Hub
+              - run:
+                  name: Push Docker Image to Docker Hub
+                  command: docker push $DOCKERHUB_USERNAME/myapp:${CIRCLE_SHA1}  # Push the Docker image to Docker Hub
+
 workflows:
     version: 2
     build_and_deploy:
