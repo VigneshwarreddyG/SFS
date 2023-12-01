@@ -23,6 +23,9 @@ jobs:
           command: |
             pytest Agentlogintest.py
       # Build Docker image upon successful tests
+      # Start Docker daemon
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: Build Docker image
           command: |
