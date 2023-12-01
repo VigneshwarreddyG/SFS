@@ -23,6 +23,9 @@ jobs:
                 command: |
                   pytest Agentlogintest.py
             - run:
+                name: Debug Circle_SHA1
+                command: echo "Circle_SHA1 is ${CIRCLE_SHA1}"
+            - run:
                 name: Docker build
                 command: docker build -t $DOCKERHUB_USERNAME/sfs:${CIRCLE_SHA1} .  # Build a Docker image with a tag based on the commit SHA1
             - run:
