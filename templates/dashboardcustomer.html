@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFS</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+</head>
+<style media="screen">
+    .carousel-cell {
+        width: 25%;
+        margin-right: 10px;
+    }
+    .carousel-cell:before {
+        display: block;
+    }
+</style>
+
+<body>
+    <div id="outerdiv">
+        <!-- 1. home service div1 -->
+        <div id="div1">
+            <div id="navigation">
+                <!-- <img src="logo.png" alt=""> -->
+                <nav id="navBar">
+                    <a class="login-btn" href="{{ url_for('logout')}}"><p>Logout</p></a>
+                </nav>
+                <nav id="navBar">
+                    <a class="login-btn" href="{{ url_for('logout')}}"><p>Welcome, {{ username }}!</p></a>
+                </nav>
+                <!-- <nav id="navBar">
+                    <a class="login-btn" href="{{ url_for('Carbookinglist') }}"><p>Booking History</p></a>
+                </nav> -->
+                
+            </div>
+            <h1>Home services, on demand.</h1>
+            <div id="src">
+                <!-- <select name="" id="">
+                </select> -->
+                <!-- <input type="text" placeholder="Search for services"> -->
+            </div>
+            <br>
+            <div id="links">
+                <a href="">Car Service</a>
+                <a href="">Grocery Service</a>
+                <a href="">Accomodation Service</a>
+            </div>
+        </div>
+        <div id="div2">
+            <div>
+                <a href="{{ url_for('customerCarbooking') }}"><img src="{{ url_for('static', filename='carservicelogo.jpg') }}"
+                    alt=""></a>
+                <span>Car Service</span>
+            </div>
+            <div>
+                <a href="{{ url_for('customergroceryservice') }}"><img src="{{ url_for('static', filename='groceryservice.jpg') }}"
+                    alt=""></a>
+                    <span>Grocery Service</span>
+            </div>
+            </a>
+            <div>
+                <a href="{{ url_for('customerAccomodationservice') }}"><img src="{{ url_for('static', filename='accomodationservice.jpg') }}"
+                    alt=""></a>
+                <span>Accomodation Service</span>
+            </div>
+
+        </div>
+    </div>
+    <!--3. special div  -->
+    <div id="special">
+        <div class="carousel" data-flickity='{"autoplay":true}'>
+            <div class="carousel-cell">
+                <img class="w3-image"
+                    src="{{ url_for('static', filename='grocerydashimg.jpg') }}">
+            </div>
+            <div class="carousel-cell">
+                <img class="w3-image"
+                    src="{{ url_for('static', filename='carlogo.jpg') }}"
+                    alt="">
+            </div>
+            <div class="carousel-cell">
+                <img class="w3-image"
+                    src="{{ url_for('static', filename='accommodation-student.jpg') }}"
+                    alt="">
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- 4. best offer div  -->
+    <!-- <div id="bestoffer">
+        <h1>Best Offers</h1>
+        <p>Hygienic & single-use products | low-contact services</p>
+        <br>
+        <div>
+            <div>
+                <img src="https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,fl_progressive:steep,w_532/t_high_res_category/images/growth/home-screen/1615874646690-66ab68.jpeg"
+                    alt="">
+                <h5>Salon for Men</h5>
+                <p>Flat ₹100 off</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,fl_progressive:steep,w_532/t_high_res_category/images/growth/home-screen/1603078782132-dfcd55.jpeg"
+                    alt="">
+                <h5>Salon Prime</h5>
+                <p>Up to 50% Off</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,fl_progressive:steep,w_532/t_high_res_category/images/supply/customer-app-supply/1606211470897-f4afbc.jpeg"
+                    alt="">
+                <h5>Massage for Men</h5>
+                <p>Flat 20% Cashback</p>
+            </div>
+            <div>
+                <img src="https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,fl_progressive:steep,w_532/t_high_res_category/images/growth/home-screen/1625159882387-9585c7.jpeg"
+                    alt="">
+                <h5>Bathroom and Kitchen Cleaning</h5>
+                <p></p>
+            </div>
+        </div>
+    </div> -->
+    <!-- 5.appliance div  -->
+    <!-- <div id="appliance">
+        <h1>Appliances</h1>
+        <p>Servicing, Repair, Installation & Uninstallation</p>
+        <br>
+        <div>
+            
+        </div> -->
+    <!-- </div> -->
+    <div>
+        <!-- 6.salon div  -->
+        <div id="salon">
+            <h1>BookingHistories</h1>
+            <!-- <p>Hygienic & Single use products | Low-contact services</p> -->
+            <br>
+            <div>
+                <div>
+                    <a href="{{ url_for('customercarlist') }}"><img src="{{ url_for('static', filename='carservicelogo.jpg') }}"
+                        alt=""></a>
+                    <h5>Car Service BookingHistory</h5>
+                    <!-- <p>Up to 50% Off</p> -->
+                </div>
+                <div>
+                    <a href="{{ url_for('customergrocerylist') }}"><img src="{{ url_for('static', filename='groceryservice.jpg') }}"
+                        alt=""></a>
+                    <h5>Grocery Service Booking History</h5>
+                    <!-- <p>Artists trained by Chandni Singh Studio</p> -->
+                </div>
+                <div>
+                    <a href="{{ url_for('customeraccomodationlist') }}"><img src="{{ url_for('static', filename='accomodationservice.jpg') }}"
+                        alt=""></a>
+                    <h5>Accomodation Service Booking History</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- black layer 1 -->
+    <div class="overLayer1"></div>
+    <!-- login form  -->
+    <form action class="loginForm">
+        <h1>Log In</h1>
+        <span class="del">&times;</span>
+        <label for="">User Name:</label>
+        <input type="email" id="newEmail" placeholder="Email Id">
+        <label for=""> Password:</label>
+        <input type="password" id="password" placeholder="Password">
+        <button id="sub-log">Log In</button>
+        <p>New User? <a class="signup-btn" href="#">Sign Up</a></p>
+    </form>
+
+    <!-- sign up  -->
+
+    <!-- black layer 2 -->
+    <div class="overLayer2"></div>
+    <!-- signup form  -->
+    <form action class="signupForm">
+        <h1>Sign Up</h1>
+        <span class="clr">&times;</span>
+        <label for="">User Name:</label>
+        <input type="email" id="email" placeholder="Email Id">
+        <label for=""> Create Password:</label>
+        <input type="password" id="createPass" placeholder="Password">
+        <label for=""> Conform Password:</label>
+        <input type="password" id="confPass" placeholder="Password">
+        <button id="sub-sign">Sign Up</button>
+        <p>Already have an account? <a class="login-btn" href="#">Log In</a></p>
+    </form>
+
+    <!-- logout 
+    <form action="" id="logOutForm">
+        <button id="logout">Log Out</button>
+    </form> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

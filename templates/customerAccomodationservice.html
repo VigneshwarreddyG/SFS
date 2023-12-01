@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Service Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Carbooking.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/formstyles.css">
+    <style>
+        /* Inline CSS to reduce space between form details */
+        #priceDisplay {
+            text-align: center;
+            margin-top: 20px;
+            color: black;
+            font-weight: bold;
+        }
+        .formbold-main-wrapper {
+            max-width: 550px;
+            width: 100%;
+            background: white;
+            padding: 48px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f1a864;
+            border-top: 2px solid #f1a864;
+            position: relative;
+            z-index: 1;
+            margin: auto; /* Center the form on the page */
+        }
+
+        .formbold-form-wrapper {
+            margin-bottom: 20px; 
+        }
+
+        .formbold-mb-5 {
+            margin-bottom: 10px; /* Reduce margin between form elements */
+        }
+
+        .formbold-form-label {
+            display: block;
+            font-weight: 500;
+            font-size: 16px;
+            color: #07074d;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .formbold-form-input {
+            width: calc(100% - 48px);
+            padding: 16px 24px;
+            margin-bottom: 5px; /* Reduce margin between form inputs */
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            font-weight: 500;
+            font-size: 16px;
+            color: #6b7280;
+            outline: none;
+            resize: none;
+        }
+
+        .formbold-btn {
+            text-align: center;
+            font-size: 16px;
+            border-radius: 6px;
+            padding: 14px 32px;
+            border: none;
+            font-weight: 600;
+            background-color: #f1a864;
+            color: white;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .formbold-btn:hover {
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <form id="carServiceForm" action="{{ url_for('customerAccomodationserviceform')}}" method="post">
+                <div class="formbold-mb-5">
+                    <label for="NameoftheCustomer" class="formbold-form-label">NameoftheCustomer</label>
+                    <input type="text" id="nameofcustomer" name="nameofcustomer" class="formbold-form-input" placeholder="Enter Name of the Customer"  value="{{ accommodation[0] }}" required>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="ApartmentDetails" class="formbold-form-label">Apartment Details:</label>
+                    <input type="text" id="ApartmentDetails" name="ApartmentDetails" class="formbold-form-input" placeholder="Enter Type of the Apartment Details(Like 1b1b,2b1b,2b2b...etc)" value="{{ accommodation[1] }}" required>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="members" class="formbold-form-label">HOW MANY MEMBERS:</label>
+                    <input type="text" id="members" name="members" class="formbold-form-input" placeholder="How many members to lease the Apartment"  value="{{ accommodation[2] }}"required>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="location" class="formbold-form-label">Location Prefrences:</label>
+                    <input type="text" id="location" name="location" class="formbold-form-input" placeholder="Enter Location Prefrences"   value="{{ accommodation[3] }}"required>
+                </div>
+                <div class="formbold-mb-5">
+                    <label for="movein" class="formbold-form-label">MoveIn Date:</label>
+                    <input type="date" id="movein" name="movein" class="formbold-form-input" placeholder="Can U Tell me the When U would like to Move in?"   value="{{ accommodation[4] }}"required>
+                </div>
+                <div class="formbold-mb-5" id="priceDisplay"  ></div>
+                    
+                <input type="hidden" name="id" value="{{ accommodation[6] }}">
+
+                <div>
+                    <button type="submit" class="formbold-btn" onclick="calculatePrice()">Book Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Attach the calculatePrice function to input change events
+        document.getElementById("members").addEventListener("input", calculatePrice);
+        document.getElementById("ApartmentDetails").addEventListener("input", calculatePrice);
+
+        function calculatePrice() {
+            // Get values from the form
+            var members = parseInt(document.getElementById("members").value);
+            var apartmentType = document.getElementById("ApartmentDetails").value;
+
+            // Get the element where you want to display the price
+            var priceDisplayElement = document.getElementById("priceDisplay");
+
+            // Define your pricing logic based on preferences
+            var totalPrice = 0;
+            if (apartmentType === "2b2b" && members == 5) {
+                totalPrice = 1350;
+            }
+            if (apartmentType === "2b2b" && members == 4) {
+                totalPrice = 1250;
+            }
+            
+            if (apartmentType === "2b1b" && members==4) {
+                totalPrice = 1200;
+            }
+            if (apartmentType === "2b1b" && members==5) {
+                totalPrice = 1200;
+            }
+            if (apartmentType === "1b1b" && members==2) {
+                totalPrice = 950;
+            }
+            if (apartmentType === "1b1b" && members==1) {
+                totalPrice = 950;
+            }
+            if (apartmentType === "1b1b" && members==1) {
+                totalPrice = 950;
+            }
+            if (apartmentType === "3b1b" && members==5) {
+                totalPrice = 1500;
+            }  
+            if (apartmentType === "3b2b" && members==5) {
+                totalPrice = 1600;
+            }
+            if (apartmentType === "3b2b" && members==5) {
+                totalPrice = 1800;
+            } 
+            if (apartmentType === "3b3b" && members==6) {
+                totalPrice = 2000;
+            } 
+            if (apartmentType === "3b3b" && members==4) {
+                totalPrice = 1800;
+            }
+            priceDisplayElement.innerHTML = "Total Price: $" + totalPrice;
+        }
+    </script>
+</body>
+
+</html>
