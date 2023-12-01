@@ -13,7 +13,7 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir --no-parallel -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
