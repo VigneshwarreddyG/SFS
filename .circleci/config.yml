@@ -22,19 +22,7 @@ jobs:
                 name: Run tests 2
                 command: |
                   pytest Agentlogintest.py
-            - run:
-                name: Debug Circle_SHA1
-                command: echo "Circle_SHA1 is ${CIRCLE_SHA1}"
-            - run:#sssssssss
-                name: Docker build
-                command: docker build -t $DOCKERHUB_USERNAME/sfs:${CIRCLE_SHA1} .  # Build a Docker image with a tag based on the commit SHA1
-            - run:#sssa
-                name: Authenticate with Docker Hub
-                command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin  # Logging in to Docker Hub
-            - run:
-                name: Push Docker Image to Docker Hub
-                command: docker push $DOCKERHUB_USERNAME/sfs:${CIRCLE_SHA1}  # Push the Docker image to Docker Hub
-
+            
 workflows:
     version: 2
     build_and_deploy:
