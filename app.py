@@ -4,7 +4,7 @@ import re
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'saaa'
 mysql = mysql.connector.connect(
-    host="localhost",
+    host="mysql-container",
     user="root",
     password="Saicharan@27",
     database="SFS"
