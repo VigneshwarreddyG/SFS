@@ -28,7 +28,7 @@ jobs:
             - run:
                 name: Docker build
                 command: docker build -t $DOCKERHUB_USERNAME/sfs:${CIRCLE_SHA1} .  # Build a Docker image with a tag based on the commit SHA1
-            - run:
+            - run:#sssa
                 name: Authenticate with Docker Hub
                 command: echo "$DOCKERHUB_PASS" | docker login --username $DOCKERHUB_USERNAME --password-stdin  # Logging in to Docker Hub
             - run:
