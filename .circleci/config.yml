@@ -22,7 +22,7 @@ jobs:
           name: Run tests 2
           command: |
             pytest Agentlogintest.py
-      # Build Docker image upon successful test
+      # Build Docker image upon successful tests
       - run:
           name: Build Docker image
           command: |
