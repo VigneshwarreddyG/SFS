@@ -12,7 +12,7 @@ The Service Fulfillment System (SFS) is a versatile application designed to stre
 - Docker
 
 # Installation
-- clone the repository:git clone https://github.com/VigneshwarreddyG/sfs.git
+- Clone the repository:git clone https://github.com/VigneshwarreddyG/sfs.git
 - Creating a virtual environment
 - Install dependencies:pip install -r requirements.txt
 - Database configuration
