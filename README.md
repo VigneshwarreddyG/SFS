@@ -6,7 +6,7 @@ The Service Fulfillment System (SFS) is a versatile application designed to stre
 
 # Environment setup
 
-- Python 3.x
+- Python 3.9.6
 - Flask web framework
 - MySQL database
 - Docker
