@@ -1,29 +1,35 @@
 version: 2.1
+
 jobs:
   build_and_push:
     docker:
       - image: cimg/python:3.8
     steps:
+      # Checkout the source code
       - checkout
+      # Install Python dependencies
       - run:
           name: Install Dependencies
           command: pip install -r requirements.txt
+      # Display a welcome message
       - run:
           name: "Say Welcome"
           command: "echo Hello, This is SFS"
+      # Reinstall dependencies (redundant, consider removing)
       - run:
           name: Install Dependencies
           command: pip install -r requirements.txt
+      # Run tests for the custlogin_test.py file
       - run:
           name: Run tests 1
           command: |
             pytest custlogin_test.py
+      # Run tests for the Agentlogintest.py file
       - run:
           name: Run tests 2
           command: |
             pytest Agentlogintest.py
-      # Build Docker image upon successful tests
-      # Start Docker daemon
+      # Set up Docker and build/push Docker image upon successful tests
       - setup_remote_docker:
           version: 19.03.13
       - run:
@@ -37,6 +43,7 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
+      # Trigger the build_and_push job only for changes in the main branch
       - build_and_push:
           filters:
             branches:
