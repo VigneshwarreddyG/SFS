@@ -17,6 +17,15 @@ The Service Fulfillment System (SFS) is a versatile application designed to stre
 - Install dependencies: pip install -r requirements.tx
 - Database configuration: Replace your database uername and password in flask app
 - Apply database migrations
+- Installing Docker on your system
+  
+### Running the project via Docker
+1) Install Docker on your system :https://www.docker.com/get-started/
+2) Open PowerShell and execute the following commands:
+docker pull charanl/sfs-image:latest
+docker network create my-network
+docker run -d --name mysql-container --network my-network -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=sfs mysql:latest
+docker run -d --name php-container --network my-network -p 5000:5000 charanl/sfs-image:latest
 
 ### Building and running the application
 - Run the flask development server: flask run
@@ -26,7 +35,7 @@ The Service Fulfillment System (SFS) is a versatile application designed to stre
 - Run the docker container: docker run -p 5000:5000 sfs-app
 
 ### How to use flask for buliding the applications
-Go through the below sites
+Go through the below sites:
 1)https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3
 2)https://www.freecodecamp.org/news/how-to-build-a-web-application-using-flask-and-deploy-it-to-the-cloud-3551c985e492/
 
