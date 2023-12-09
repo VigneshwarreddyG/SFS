@@ -1,98 +1,120 @@
-from flask import Flask, render_template, request, redirect, url_for,session
+# Importing  necessary modules from Flask and MySQL connector
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 import re
+
+# Initializing the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'saaa'
+
+# Connect to the MySQL database
 mysql = mysql.connector.connect(
     host="mysql-container",
     user="root",
     password="Saicharan@27",
     database="SFS"
 )
-@app.route('/',methods=['POST','GET'])
+
+# Defining the route for the main page
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    cursor =  mysql.cursor()
+    # Fetch all user records from the 'accounts' table
+    cursor = mysql.cursor()
     cursor.execute("SELECT * FROM accounts")
     users = cursor.fetchall()
     cursor.close()
     return render_template('main.html', users=users)
 
+# Defining the route for the admin dashboard
 @app.route('/admin_index')
 def admin_index():
+    # Fetch customer and agent records from the 'accounts' table
     cur = mysql.cursor()
     cur.execute("SELECT * FROM Accounts WHERE usertype = 'customer'")
     customers = cur.fetchall()
-    print(customers)
     cur.execute("SELECT * FROM Accounts WHERE usertype = 'agent'")
     agents = cur.fetchall()
-    print(agents)
     cur.close()
-    return render_template('admindashboard.html',customers=customers,agents=agents)
+    return render_template('admindashboard.html', customers=customers, agents=agents)
 
-@app.route('/Custregisterhtml',methods=['POST','GET'])
+# Defining the route for the customer registration form
+@app.route('/Custregisterhtml', methods=['POST', 'GET'])
 def Custregisterhtml():
     return render_template('Custregister.html')
 
+# Define the route for the logout functionality
 @app.route('/logout', methods=['GET'])
 def logout():
     return redirect(url_for('index'))
 
-
-
-@app.route('/Custloginhtml',methods=['POST','GET'])
+# Define the route for the customer login form
+@app.route('/Custloginhtml', methods=['POST', 'GET'])
 def Custloginhtml():
     return render_template('Custlogin.html')
 
-@app.route('/Ageloginhtml',methods=['POST','GET'])
+# Define the route for the agent login form
+@app.route('/Ageloginhtml', methods=['POST', 'GET'])
 def Agentloginhtml():
     return render_template('Agentlogin.html')
 
-@app.route('/Ageregisterhtml',methods=['POST','GET'])
+# Define the route for the agent registration form
+@app.route('/Ageregisterhtml', methods=['POST', 'GET'])
 def Ageregisterhtml():
     return render_template('Agentregister.html')
 
-@app.route('/Admin',methods=['POST','GET'])
+# Define the route for the admin login form
+@app.route('/Admin', methods=['POST', 'GET'])
 def Adminlogin():
     return render_template('Adminlogin.html')
 
-@app.route('/customerlogin', methods =['GET', 'POST'])
+# Define the route for customer login
+@app.route('/customerlogin', methods=['GET', 'POST'])
 def customerlogin():
-    msg=''
+    msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        # Fetch user account from the 'accounts' table based on username and password
         username = request.form['username']
         password = request.form['password']
         cursor = mysql.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND pass = %s', (username, password))
         account = cursor.fetchone()
         cursor.close()
-        print(account,"Hello 123789")
+        print(account, "Hello 123789")
         if account:
             if username == account[3] and password == account[6]:
-                msg = 'Logged in successfully !'
+                # Successful login, store username in the session
+                msg = 'Logged in successfully!'
                 session['username'] = username
                 print(session['username'])  # Debugging statement
                 print("username after logging in")
                 
-                return render_template('dashboardcustomer.html',username=username,msg = msg)
+                # Redirect to the customer dashboard
+                return render_template('dashboardcustomer.html', username=username, msg=msg)
             else:
-                msg = 'Incorrect username / password !'
-                return render_template('Custlogin.html', msg = msg)
+                msg = 'Incorrect username / password!'
+                return render_template('Custlogin.html', msg=msg)
         else:
-            return render_template('main.html',msg='Username or Password is incorrect!')
+            # Redirect to the main page with an error message
+            return render_template('main.html', msg='Username or Password is incorrect!')
 
-@app.route('/groceryservice', methods =['GET', 'POST'])
+# Define the route for the grocery service
+@app.route('/groceryservice', methods=['GET', 'POST'])
 def groceryservice():
-    grocery=""
-    return render_template('groceryservice.html',grocery=grocery)
+    grocery = ""
+    return render_template('groceryservice.html', grocery=grocery)
 
-@app.route('/customergroceryservice', methods =['GET', 'POST'])
+# Define the route for the customer grocery service
+@app.route('/customergroceryservice', methods=['GET', 'POST'])
 def customergroceryservice():
-    grocery=""
-    return render_template('customergroceryservice.html',grocery=grocery)
-@app.route('/customerregister', methods =['GET', 'POST'])
+    grocery = ""
+    return render_template('customergroceryservice.html', grocery=grocery)
+
+# Define the route for customer registration
+@app.route('/customerregister', methods=['GET', 'POST'])
 def customerregister():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'fname' in request.form  and 'lname' in request.form and 'email' in request.form and 'phone' in request.form and 'address' in request.form :
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'fname' in request.form and 'lname' in request.form and 'email' in request.form and 'phone' in request.form and 'address' in request.form:
+        # Fetch registration form data
         fname = request.form['fname']
         lname = request.form['lname']
         address = request.form['address']
@@ -100,28 +122,35 @@ def customerregister():
         phone = request.form['phone']
         email = request.form['email']
         password = request.form['password']
-        print(fname,lname,address,username,phone,email,password)
-        cursor =  mysql.cursor()
+        print(fname, lname, address, username, phone, email, password)
+        cursor = mysql.cursor()
+        # Check if the username already exists
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
         account = cursor.fetchone()
         print(account)
         if account:
-            msg = 'Account already exists !'
+            msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address !'
+            msg = 'Invalid email address!'
         elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers !'
+            msg = 'Username must contain only characters and numbers!'
         elif not username or not password or not email:
-            msg = 'Please fill out the form !'
+            msg = 'Please fill out the form!'
         else:
-            cursor.execute("INSERT INTO accounts (fname,lname,address,username,phone,email,pass,usertype) VALUES (%s, %s,%s,%s, %s,%s,%s, %s)", (fname,lname,address,username,phone,email,password,"customer"))
+            # Insert new account data into the 'accounts' table
+            cursor.execute(
+                "INSERT INTO accounts (fname,lname,address,username,phone,email,pass,usertype) VALUES (%s, %s,%s,%s, %s,%s,%s, %s)",
+                (fname, lname, address, username, phone, email, password, "customer"))
             mysql.commit()
             msg = 'You have successfully registered !'
-            return render_template('Custlogin.html', msg = msg)
+            # Redirect to the customer login page with a success message
+            return render_template('Custlogin.html', msg=msg)
         cursor.close()
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
-    return render_template('Custregister.html', msg = msg)
+    # Render the customer registration page with appropriate messages
+    return render_template('Custregister.html', msg=msg)
+
 
 @app.route('/delete_accomodation/<int:id>')
 def delete_accomodation(id):
