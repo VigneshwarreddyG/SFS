@@ -15,7 +15,7 @@ jobs:
       - run:
           name: "Say Welcome"
           command: "echo Hello, This is SFS"
-      # Reinstall dependencies (redundant, consider removing)
+      # Reinstall dependencies (redundant, consider removings)
       - run:
           name: Install Dependencies
           command: pip install -r requirements.txt
